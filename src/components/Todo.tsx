@@ -12,8 +12,7 @@ interface PropsAssignment {
 
 export function Todo() {
     const [assignments, setAssignments] = useState<PropsAssignment[]>([])
-    console.log(assignments)
-
+   
 
     const handleCreateNewAssignment = (data: PropsAssignment) => {
         const newData = {
