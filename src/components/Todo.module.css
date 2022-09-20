@@ -1,0 +1,130 @@
+.main {
+    margin: 0 auto;
+}
+
+.formTodo {
+    margin-top: -1.5rem;
+    width: 100%;
+    align-items: center;
+    display: flex;
+    padding: 0;
+    gap: 0.5rem;
+}
+
+.formTodo button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-weight: 700;
+    font-size: 0.875rem;
+    color: var(--gray-100);
+    line-height: 140%;
+    width: 5.5rem;
+    height: 3.25rem;
+    border-radius: 8px;
+    background: var(--blueDark);
+    border: none;
+    cursor: pointer;
+
+
+}
+
+.formTodo button svg {
+    color: var(--gray-100);
+    width: 1rem;
+    height: 1rem;
+}
+
+.formTodo input {
+    width: 100%;
+    height: 3.25rem;
+    border-radius: 8px;
+    border: none;
+    background: var(--gray-500);
+    padding-left: 1rem;
+    color: var(--gray-100);
+
+}
+.formTodo button:disabled{
+    opacity: 0.7;
+    cursor: not-allowed
+ }
+
+.divCount {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.divCount p {
+    color: var(--blue);
+    font-style: normal;
+    font-weight: 700;
+    font-size: 0.875rem;
+    line-height: 1rem;
+}
+
+.divCount strong {
+    color: var(--gray-100);
+    margin-left: 0.5rem;
+    border-radius: 50%;
+    background: var(--gray-400);
+    padding: 4px 8px;
+}
+
+.assignment {
+    display: flex;
+    padding: 0 1rem;
+    height: 4.5rem;
+    background: var(--gray-500);
+    margin-top: 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--gray-400);
+    align-items: center;
+
+}
+
+.inputRadio {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+
+.assignment button {
+    cursor: pointer;
+    background: transparent;
+    border: transparent;
+    box-shadow: none;
+    height: auto;
+
+}
+
+.assignment button svg {
+    width: 1.2rem;
+    height: 1.2rem;
+    color: var(--gray-300);
+}
+
+.assignment button:hover {
+    background: var(--gray-400);
+    border-radius: 4px;
+
+}
+
+.assignment svg:hover {
+    color: var(--danger);
+
+}
+
+.inputRadio label {
+    font-size: 0.875rem;
+
+}
+
+.inputRadio input[type='checkbox'] {
+    margin-top: 0.2rem;  
+
+}
