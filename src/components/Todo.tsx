@@ -7,6 +7,7 @@ import { v4 as uuidV4 } from 'uuid'
 interface PropsAssignment {
     id: string;
     name: string
+    status: boolean
 }
 
 export function Todo() {
@@ -14,59 +15,80 @@ export function Todo() {
     console.log(assignments)
 
 
-
     const handleCreateNewAssignment = (data: PropsAssignment) => {
         const newData = {
             id: uuidV4(),
-            name: data.name
+            name: data.name,
+            status: false
         }
         setAssignments([...assignments, newData])
         reset()
     }
 
-    const { register, handleSubmit, formState: { errors }, reset, setValue, watch } = useForm<PropsAssignment>()
+    const { register, handleSubmit, reset, watch } = useForm<PropsAssignment>()
 
-   
+
     const valueName = watch("name")
     const disableButtonIfInputIsEmpty = !valueName
 
-
-    function deleteComment(assignmentId: string) {
-        const commentsWithoutDeleteOne = assignments.filter(a => a.id !== assignmentId)        
+    function deleteAssignment(assignmentId: string) {
+        const commentsWithoutDeleteOne = assignments.filter(a => a.id !== assignmentId)
         setAssignments(commentsWithoutDeleteOne)
     }
 
+    function handleMarkAsCompleted(assignment: PropsAssignment) {
+        if (assignment.status == false) {
+            const updatedAssignment = assignments.map(assig => assig.id === assignment.id ? {
+                ...assig,
+                status: true
+            } : assig)
+            setAssignments(updatedAssignment)
+        } else {
+            const updatedAssignment = assignments.map(assig => assig.id === assignment.id ? {
+                ...assig,
+                status: false
+            } : assig)
+            setAssignments(updatedAssignment)
+        }
+
+    }
+
+    const totalCompleted = assignments.reduce((total, assignment) => {
+        if (assignment.status === true) {
+            return total + 1;
+        }
+        return total
+    }, 0)
 
     return (
         <main className={styles.main}>
             <form className={styles.formTodo} onSubmit={handleSubmit(handleCreateNewAssignment)} >
                 <input
-                    type="text"                    
+                    type="text"
                     placeholder='Adicione uma nova tarefa'
                     {...register("name")}
                 />
                 <button
-                 disabled={disableButtonIfInputIsEmpty} >Criar <FiPlusCircle /></button>
+                    disabled={disableButtonIfInputIsEmpty} >Criar <FiPlusCircle /></button>
             </form>
             <div className={styles.listTodo}>
                 <div className={styles.divCount}>
                     <p>Tarefas criadas <strong>{assignments.length} </strong></p>
-                    <p>Concluídas <strong> 0</strong></p>
+                    <p className={styles.completed}>Concluídas <strong>{totalCompleted} de {assignments.length } </strong></p>
                 </div>
             </div>
             {assignments.map((a) => {
                 return (
                     <div key={a.id} className={styles.assignment}>
                         <div className={styles.inputRadio}>
-                            <input type="checkbox" id='assignment' />
-                            <label htmlFor="assignment">{a.name} </label>
+                            <input onClick={() => handleMarkAsCompleted(a)} type="checkbox" id={a.id} />
+                            <label htmlFor={a.id}>{a.name} </label>
                         </div>
-                        <button onClick={() => deleteComment(a.id)} ><FiTrash2 /> </button>
+                        <button onClick={() => deleteAssignment(a.id)} ><FiTrash2 /> </button>
 
                     </div>
                 )
             })}
-
 
         </main>
     )

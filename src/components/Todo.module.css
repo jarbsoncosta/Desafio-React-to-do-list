@@ -26,9 +26,10 @@
     background: var(--blueDark);
     border: none;
     cursor: pointer;
-
+    transition: 0.2s;
 
 }
+
 
 .formTodo button svg {
     color: var(--gray-100);
@@ -50,6 +51,9 @@
     opacity: 0.7;
     cursor: not-allowed
  }
+ .formTodo button:hover{
+  background: var(--blue);
+ }
 
 .divCount {
     margin-top: 3rem;
@@ -69,9 +73,12 @@
 .divCount strong {
     color: var(--gray-100);
     margin-left: 0.5rem;
-    border-radius: 50%;
+    border-radius: 25%;
     background: var(--gray-400);
-    padding: 4px 8px;
+    padding: 5px 8px;
+}
+.divCount .completed {
+    color:var(--purpleDark)
 }
 
 .assignment {
@@ -82,8 +89,7 @@
     margin-top: 1rem;
     border-radius: 8px;
     border: 1px solid var(--gray-400);
-    align-items: center;
-
+    align-items: center;    
 }
 
 .inputRadio {
@@ -98,6 +104,7 @@
     background: transparent;
     border: transparent;
     box-shadow: none;
+    padding: 5px;
     height: auto;
 
 }
@@ -121,10 +128,71 @@
 
 .inputRadio label {
     font-size: 0.875rem;
-
 }
 
-.inputRadio input[type='checkbox'] {
-    margin-top: 0.2rem;  
 
-}
+.inputRadio {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .inputRadio input {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+    cursor: pointer;
+  }
+  .inputRadio label {
+    position: relative;
+    padding-left: 2.2em;
+    display: inline-block;
+    cursor: pointer;
+  }
+  .inputRadio label::before {
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    border-radius: 50%;
+    height: 1rem;
+    width: 1rem;
+    background: #FFF;
+    margin-right: 0.5em;
+    border: 1px solid var(--blue);
+    background: transparent;  
+    transition: all 0.2s ease;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(0, -50%);
+  }
+  .inputRadio label::after {
+    content: "\2713";
+    position: absolute;
+    top: 44%;
+    left: 0.65em;
+    transform: translate(-50%, -50%);
+    font-size: 1em;
+    color: #FFF;
+    opacity: 0;
+    transition: all 0.2s ease;
+    
+  }
+
+  .inputRadio input:checked + label::before {
+    background: var( --purpleDark);
+    border-color: var( --purpleDark);
+    
+  }
+  .inputRadio input:checked + label::after {
+    opacity: 1;
+    
+  }
+  .inputRadio input:checked + label {
+   text-decoration: line-through;
+   color: var(--gray-300);
+    
+  }
